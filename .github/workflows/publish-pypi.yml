@@ -1,0 +1,73 @@
+name: publish-pypi
+
+# PyPI Trusted Publishing (OIDC), no API token. Requirements checked against
+# https://docs.pypi.org/trusted-publishers/ on 2026-11-23:
+#   * a trusted publisher must exist on PyPI for `ragpipe`:
+#       Owner: Icefox12138 / Repository: ragpipe
+#       Workflow name: publish-pypi.yml / Environment: pypi
+#   * permissions: id-token: write (publishing job only)
+# Release path: push a tag. Recovery: workflow_dispatch with publish=true.
+
+on:
+  push:
+    tags:
+      - "ragpipe-v*"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Upload to PyPI (leave off to only build and test)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: check that the tag matches the package version
+        if: startsWith(github.ref, 'refs/tags/ragpipe-v')
+        run: |
+          tag="${GITHUB_REF_NAME#ragpipe-v}"
+          version=$(python -c "import tomllib,pathlib; print(tomllib.loads(pathlib.Path('pyproject.toml').read_text(encoding='utf-8'))['project']['version'])")
+          echo "tag=$tag version=$version"
+          test "$tag" = "$version" || { echo "::error::tag $tag does not match version $version"; exit 1; }
+      - name: install
+        run: python -m pip install -e ".[pdfium]" build twine
+      - name: selftest
+        run: python -m ragpipe.cli selftest
+      - name: build
+        run: |
+          rm -rf dist
+          python -m build
+      - name: check the artefacts
+        run: twine check dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: publish to PyPI
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/ragpipe-v') || inputs.publish == true
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ragpipe
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true
