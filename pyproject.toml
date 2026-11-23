@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ragpipe"
+version = "0.1.0"
+description = "Lightweight single-machine pipeline: PDF (+ OCR) -> data contract -> database for agents."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "ragpipe contributors"}]
+requires-python = ">=3.10"
+keywords = ["rag", "pdf", "ocr", "sqlite", "pipeline", "agent", "fts"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Database",
+    "Topic :: Text Processing",
+]
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+pdfium = ["pypdfium2>=4.30"]
+mupdf = ["pymupdf>=1.24"]
+rapid = ["rapidocr-onnxruntime"]
+kraken = ["kraken"]
+paddle = ["paddleocr"]
+
+[project.scripts]
+ragpipe = "ragpipe.cli:main"
+
+[tool.setuptools]
+packages = ["ragpipe", "ragpipe.ocr"]

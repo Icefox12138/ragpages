@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+
+# Build artifacts
+dist/
+build/
+
+# Virtual environments
+.venv*/
+venv*/
+
+# Local pipeline artifacts (examples; adjust for your layout)
+data/
+models/
+catalog/
+*.db
+*.db-wal
+*.db-shm
+pages.jsonl
+book.json
+*-manifest.json
+search-eval.json
