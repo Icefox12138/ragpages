@@ -86,8 +86,8 @@ Environment variables:
 
 | Variable | Effect |
 |---|---|
-| `RAGPIPE_CONFIG` | path of the `pipeline.yaml` to load |
-| `RAGPIPE_DATA` | override the output data root |
+| `RAGPAGES_CONFIG` | path of the `pipeline.yaml` to load |
+| `RAGPAGES_DATA` | override the output data root |
 
 ## Output contract
 
@@ -160,5 +160,5 @@ OCR 阶段），输出符合经典 RAG 数据库契约的 SQLite 产物（`docum
 `chunks_fts` / `toc` 表 + manifest 与评测文件），可直接交给下游 Agent 运行时做检索、
 引用与回页。对比 MinerU 这类服务化重型管线，ragpages 只有 CLI、零服务、零云端依赖，
 模型不进仓库只记 sha256；默认解析器 pypdfium2（BSD/Apache），PyMuPDF（AGPL）仅作可选。
-配置全部走 `pipeline.yaml` profile + `RAGPIPE_CONFIG` / `RAGPIPE_DATA` 环境变量，
+配置全部走 `pipeline.yaml` profile + `RAGPAGES_CONFIG` / `RAGPAGES_DATA` 环境变量，
 代码中不含任何机器/私有路径。

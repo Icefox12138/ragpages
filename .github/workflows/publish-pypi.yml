@@ -11,7 +11,7 @@ name: publish-pypi
 on:
   push:
     tags:
-      - "ragpipe-v*"
+      - "ragpages-v*"
   workflow_dispatch:
     inputs:
       publish:
@@ -32,9 +32,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: check that the tag matches the package version
-        if: startsWith(github.ref, 'refs/tags/ragpipe-v')
+        if: startsWith(github.ref, 'refs/tags/ragpages-v')
         run: |
-          tag="${GITHUB_REF_NAME#ragpipe-v}"
+          tag="${GITHUB_REF_NAME#ragpages-v}"
           version=$(python -c "import tomllib,pathlib; print(tomllib.loads(pathlib.Path('pyproject.toml').read_text(encoding='utf-8'))['project']['version'])")
           echo "tag=$tag version=$version"
           test "$tag" = "$version" || { echo "::error::tag $tag does not match version $version"; exit 1; }
@@ -56,7 +56,7 @@ jobs:
   publish:
     name: publish to PyPI
     needs: build
-    if: startsWith(github.ref, 'refs/tags/ragpipe-v') || inputs.publish == true
+    if: startsWith(github.ref, 'refs/tags/ragpages-v') || inputs.publish == true
     runs-on: ubuntu-latest
     environment:
       name: pypi

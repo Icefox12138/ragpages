@@ -3,8 +3,8 @@
 The config file is the only place a corpus directory is named; code takes a
 profile, never a machine path. Base/data resolution lives here:
 
-  * `RAGPIPE_CONFIG` overrides the pipeline.yaml location;
-  * `RAGPIPE_DATA` overrides the output data root;
+  * `RAGPAGES_CONFIG` overrides the pipeline.yaml location;
+  * `RAGPAGES_DATA` overrides the output data root;
   * everything else resolves relative to the config file's directory.
 
 Model path resolution is limited to `ocr.models` (plus the parser selection in
@@ -18,7 +18,7 @@ import yaml
 
 def default_config_path():
     """Explicit env > ./pipeline.yaml > the template shipped in the package."""
-    env = os.environ.get("RAGPIPE_CONFIG")
+    env = os.environ.get("RAGPAGES_CONFIG")
     if env:
         return Path(os.path.expanduser(env))
     cwd = Path("pipeline.yaml")
@@ -93,10 +93,10 @@ def profile(cfg, name):
 
 
 def data_dir(cfg, override=None):
-    """Output root: `--out` > `RAGPIPE_DATA` > config `defaults.data`."""
+    """Output root: `--out` > `RAGPAGES_DATA` > config `defaults.data`."""
     if override:
         return Path(override).resolve()
-    env = os.environ.get("RAGPIPE_DATA")
+    env = os.environ.get("RAGPAGES_DATA")
     if env:
         return Path(os.path.expanduser(env)).resolve()
     return _resolve((cfg.get("defaults") or {}).get("data") or "data",

@@ -26,7 +26,7 @@ from .parser import get_parser
 
 def _writable_tmp():
     """A fresh scratch dir in the system temp; best-effort removal by callers."""
-    return tempfile.mkdtemp(prefix="ragpipe-")
+    return tempfile.mkdtemp(prefix="ragpages-")
 
 
 def _db_path(out_dir, source):
@@ -432,10 +432,10 @@ def main(argv=None):
     ap = argparse.ArgumentParser(prog="ragpages", description=__doc__.splitlines()[0])
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--config", default=None,
-                        help="pipeline.yaml (default: RAGPIPE_CONFIG env,"
+                        help="pipeline.yaml (default: RAGPAGES_CONFIG env,"
                              " else ./pipeline.yaml, else the packaged template)")
     ap.add_argument("--config", default=None,
-                    help="pipeline.yaml (default: RAGPIPE_CONFIG env,"
+                    help="pipeline.yaml (default: RAGPAGES_CONFIG env,"
                          " else ./pipeline.yaml, else the packaged template)")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
