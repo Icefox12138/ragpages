@@ -1,6 +1,6 @@
-# ragpipe profile template: PDF (+ OCR models) -> RAG database.
+# ragpages profile template: PDF (+ OCR models) -> RAG database.
 # This is the copy shipped inside the wheel (package-data); it is used only when
-# neither RAGPIPE_CONFIG nor ./pipeline.yaml exists, e.g. `ragpipe selftest` in an
+# neither RAGPIPE_CONFIG nor ./pipeline.yaml exists, e.g. `ragpages selftest` in an
 # otherwise empty directory. Copy it next to your corpus and edit the profiles.
 version: 1
 

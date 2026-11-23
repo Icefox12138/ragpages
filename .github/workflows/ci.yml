@@ -23,7 +23,7 @@ jobs:
       - name: install
         run: python -m pip install -e ".[pdfium]"
       - name: selftest (pypdfium2, the default parser)
-        run: python -m ragpipe.cli selftest
+        run: python -m ragpages.cli selftest
 
   selftest-mupdf:
     name: selftest (pymupdf)
@@ -36,4 +36,4 @@ jobs:
       - name: install
         run: python -m pip install -e ".[pdfium,mupdf]"
       - name: selftest (pymupdf)
-        run: python -m ragpipe.cli selftest --parser pymupdf
+        run: python -m ragpages.cli selftest --parser pymupdf

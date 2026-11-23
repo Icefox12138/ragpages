@@ -3,14 +3,14 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ragpipe"
+name = "ragpages"
 version = "0.1.0"
-description = "Lightweight single-machine pipeline: PDF (+ OCR) -> data contract -> database for agents."
+description = "One command turns a PDF/scan library into a citation-grade SQLite database for agents: every chunk keeps its page, locator and provenance."
 readme = "README.md"
 license = {text = "MIT"}
-authors = [{name = "ragpipe contributors"}]
+authors = [{name = "ragpages contributors"}]
 requires-python = ">=3.10"
-keywords = ["rag", "pdf", "ocr", "sqlite", "pipeline", "agent", "fts"]
+keywords = ["rag", "pdf", "ocr", "sqlite", "citation", "provenance", "pipeline", "agent", "fts"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -32,15 +32,15 @@ kraken = ["kraken"]
 paddle = ["paddleocr"]
 
 [project.urls]
-Homepage = "https://github.com/Icefox12138/ragpipe"
-Repository = "https://github.com/Icefox12138/ragpipe"
-Issues = "https://github.com/Icefox12138/ragpipe/issues"
+Homepage = "https://github.com/Icefox12138/ragpages"
+Repository = "https://github.com/Icefox12138/ragpages"
+Issues = "https://github.com/Icefox12138/ragpages/issues"
 
 [project.scripts]
-ragpipe = "ragpipe.cli:main"
+ragpages = "ragpages.cli:main"
 
 [tool.setuptools]
-packages = ["ragpipe", "ragpipe.ocr"]
+packages = ["ragpages", "ragpages.ocr"]
 
 [tool.setuptools.package-data]
-ragpipe = ["pipeline.yaml"]
+ragpages = ["pipeline.yaml"]

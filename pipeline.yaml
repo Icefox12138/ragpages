@@ -1,6 +1,6 @@
-# ragpipe profile template: PDF (+ OCR models) -> RAG database.
+# ragpages profile template: PDF (+ OCR models) -> RAG database.
 # All paths are relative to this file unless absolute; nothing here names a machine.
-# Copy this file next to your corpus, edit the profiles, and run ragpipe there.
+# Copy this file next to your corpus, edit the profiles, and run ragpages there.
 version: 1
 
 defaults:

@@ -1,13 +1,13 @@
-"""ragpipe CLI: PDF directory (+ OCR) -> RAG database.
+"""ragpages CLI: PDF directory (+ OCR) -> RAG database.
 
-    ragpipe build    --profiles books --out data/
-    ragpipe extract  --profile books --out data/ [--limit 1]
-    ragpipe search   --out data/ --sources books
-    ragpipe validate --out data/
-    ragpipe ocr      --profile books-scan --out data/ --books-from books.jsonl
-    ragpipe chapter  --source books --book a.pdf --toc toc.json
-    ragpipe meta     --in book_meta.json --out data/
-    ragpipe selftest
+    ragpages build    --profiles books --out data/
+    ragpages extract  --profile books --out data/ [--limit 1]
+    ragpages search   --out data/ --sources books
+    ragpages validate --out data/
+    ragpages ocr      --profile books-scan --out data/ --books-from books.jsonl
+    ragpages chapter  --source books --book a.pdf --toc toc.json
+    ragpages meta     --in book_meta.json --out data/
+    ragpages selftest
 
 `build` is extract per profile followed by search. Everything takes a profile,
 so no code path names a corpus directory.
@@ -429,7 +429,7 @@ def cmd_selftest(args):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="ragpipe", description=__doc__.splitlines()[0])
+    ap = argparse.ArgumentParser(prog="ragpages", description=__doc__.splitlines()[0])
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--config", default=None,
                         help="pipeline.yaml (default: RAGPIPE_CONFIG env,"

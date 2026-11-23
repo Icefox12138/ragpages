@@ -1,4 +1,4 @@
-"""ragpipe: PDF (+ OCR) -> data contract -> database for agents.
+"""ragpages: PDF (+ OCR) -> data contract -> database for agents.
 
 A lightweight, single-machine producer pipeline. It consumes PDFs (with a text
 layer, or via an OCR stage) and emits SQLite artifacts that follow a classic

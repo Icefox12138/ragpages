@@ -2,8 +2,8 @@ name: publish-pypi
 
 # PyPI Trusted Publishing (OIDC), no API token. Requirements checked against
 # https://docs.pypi.org/trusted-publishers/ on 2026-11-23:
-#   * a trusted publisher must exist on PyPI for `ragpipe`:
-#       Owner: Icefox12138 / Repository: ragpipe
+#   * a trusted publisher must exist on PyPI for `ragpages`:
+#       Owner: Icefox12138 / Repository: ragpages
 #       Workflow name: publish-pypi.yml / Environment: pypi
 #   * permissions: id-token: write (publishing job only)
 # Release path: push a tag. Recovery: workflow_dispatch with publish=true.
@@ -41,7 +41,7 @@ jobs:
       - name: install
         run: python -m pip install -e ".[pdfium]" build twine
       - name: selftest
-        run: python -m ragpipe.cli selftest
+        run: python -m ragpages.cli selftest
       - name: build
         run: |
           rm -rf dist
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/ragpipe
+      url: https://pypi.org/p/ragpages
     permissions:
       id-token: write
     steps:

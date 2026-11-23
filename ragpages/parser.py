@@ -4,7 +4,7 @@ A parser opens a PDF and yields page text and page renders; chunking and page
 anchors stay in the caller, so switching parsers cannot silently move pages.
 
 PyMuPDF is AGPL-licensed: only enable it where your deployment accepts that.
-Never mix parsers inside one database (see `ragpipe parser_compare`).
+Never mix parsers inside one database (see `ragpages parser_compare`).
 """
 import importlib.util
 

@@ -1,7 +1,7 @@
 """Chapter stage: header / 回 OCR -> `toc` rows, via `classics-index` only.
 
 No runtime import: the pure logic is the published package `classics-index`
-(PyPI, >= 0.1), the storage is `ragpipe.toc_store`. A downstream RAG runtime
+(PyPI, >= 0.1), the storage is `ragpages.toc_store`. A downstream RAG runtime
 keeps reading the same `toc` table.
 
 Inputs (JSONL, one record per page):

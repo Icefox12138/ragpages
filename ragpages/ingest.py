@@ -14,7 +14,7 @@ paths. The output follows the classic RAG database contract (the
     chunks(id, source, book, lang, page, text, visibility, stream)
     chunks_fts (fts5 unicode61, pre-tokenized text, rowid == chunks.id)
 
-  toc (written by `ragpipe.toc_store`) can live in search.db as well.
+  toc (written by `ragpages.toc_store`) can live in search.db as well.
 """
 import csv
 import hashlib
@@ -80,7 +80,7 @@ def _ocr_id(rel):
 
 
 def _ocr_pages(ocr_dir, book_id):
-    """Pages written by `ragpipe ocr`; empty when the book was never OCR'd."""
+    """Pages written by `ragpages ocr`; empty when the book was never OCR'd."""
     path = os.path.join(str(ocr_dir), book_id, "pages.jsonl")
     if not os.path.exists(path):
         return []
@@ -107,7 +107,7 @@ def extract(pdf_root, out_db, probe_csv, manifest_path=None,
     """Ingest `pdf_root` (already probed) into `out_db`.
 
     A book with no text layer falls back to `ocr_dir/<book_id>/pages.jsonl`
-    (written by `ragpipe ocr`); its language comes from `book.json` rather than
+    (written by `ragpages ocr`); its language comes from `book.json` rather than
     a hardcoded default. `limit` is for smoke runs.
     """
     engine = get_parser(parser)

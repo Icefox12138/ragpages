@@ -1,6 +1,6 @@
 """Page-level comparison of two PDF parsers on a set of PDFs.
 
-    python -m ragpipe.parser_compare --db data/indexes/books.db \
+    python -m ragpages.parser_compare --db data/indexes/books.db \
         --pdf-root pdf/books --limit-books 5 --out /tmp/parser-compare.json
 
 Why page-level, not chunk-level: chunk boundaries are a function of the raw
