@@ -17,13 +17,16 @@ import yaml
 
 
 def default_config_path():
-    """Explicit env > ./pipeline.yaml > the template shipped with the package."""
+    """Explicit env > ./pipeline.yaml > the template shipped in the package."""
     env = os.environ.get("RAGPIPE_CONFIG")
     if env:
         return Path(os.path.expanduser(env))
     cwd = Path("pipeline.yaml")
     if cwd.exists():
         return cwd.resolve()
+    packaged = Path(__file__).resolve().parent / "pipeline.yaml"
+    if packaged.exists():
+        return packaged
     return Path(__file__).resolve().parents[1] / "pipeline.yaml"
 
 

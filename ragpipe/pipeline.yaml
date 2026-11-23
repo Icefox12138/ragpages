@@ -1,0 +1,37 @@
+# ragpipe profile template: PDF (+ OCR models) -> RAG database.
+# This is the copy shipped inside the wheel (package-data); it is used only when
+# neither RAGPIPE_CONFIG nor ./pipeline.yaml exists, e.g. `ragpipe selftest` in an
+# otherwise empty directory. Copy it next to your corpus and edit the profiles.
+version: 1
+
+defaults:
+  data: data
+  parser: pypdfium2        # pypdfium2 (BSD/Apache, default) | pymupdf (AGPL; requires license care)
+                           # never mix parsers in one database
+  chunk: {size: 600, overlap: 80, min_len: 80}
+  min_cpp: 200             # books below this chars-per-page average are treated as scans
+
+# OCR is a stage, not a constant. Models are local artifacts: they never enter
+# the repository, only their sha256 enters the provenance records.
+ocr:
+  engine: rapidocr            # rapidocr | kraken | paddle (comparison) | deepseek-api (opt-in)
+  backend: cpu                # cpu | dml | cuda | ort-cuda; a missing backend is fatal
+  lang: ch
+  dpi: 300
+  models:                     # download the PP-OCRv4 ONNX models and adjust these paths
+    det: models/ch_PP-OCRv4_det_infer.onnx
+    rec: models/ch_PP-OCRv4_rec_infer.onnx
+    cls: models/ch_ppocr_mobile_v2.0_cls_infer.onnx
+  params: {use_cls: false, det_limit: 736, batch: 16}
+  qc: {blank_rate: 0.05, dup_line_rate: 0.05, min_cjk: 0.30}
+
+profiles:
+  books:                     # text layer present: extract, no OCR
+    root: pdf/books
+    source: books
+    layout: flat             # enumerate rel paths under root
+    probe: catalog/probe.csv
+  books-scan:                # no text layer: run the `ocr` stage first
+    root: pdf/books
+    source: books
+    ocr: {engine: rapidocr, lang: ch, dpi: 300}

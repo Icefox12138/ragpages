@@ -31,8 +31,16 @@ rapid = ["rapidocr-onnxruntime"]
 kraken = ["kraken"]
 paddle = ["paddleocr"]
 
+[project.urls]
+Homepage = "https://github.com/Icefox12138/ragpipe"
+Repository = "https://github.com/Icefox12138/ragpipe"
+Issues = "https://github.com/Icefox12138/ragpipe/issues"
+
 [project.scripts]
 ragpipe = "ragpipe.cli:main"
 
 [tool.setuptools]
 packages = ["ragpipe", "ragpipe.ocr"]
+
+[tool.setuptools.package-data]
+ragpipe = ["pipeline.yaml"]
